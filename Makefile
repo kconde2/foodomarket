@@ -39,6 +39,7 @@ tests: ## Lance les tests
 	docker compose exec app php bin/phpunit
 
 init: ## Exécute une commande pour initialiser toutes les données du projet
+	docker compose exec app composer install
 	docker compose exec app bin/console doctrine:database:drop --force --if-exists --env=test
 	docker compose exec app bin/console doctrine:database:create --env=test
 	docker compose exec app bin/console doctrine:migrations:migrate --no-interaction --env=test
