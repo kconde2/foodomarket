@@ -1,0 +1,8 @@
+services:
+  maildev:
+    image: djfarrelly/maildev
+    command: bin/maildev --web 80 --smtp 25 --hide-extensions STARTTLS
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.mail.rule=Host(`mail.localhost`)
+      - traefik.http.services.mail.loadbalancer.server.port=80

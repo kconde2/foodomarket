@@ -1,0 +1,11 @@
+services:
+  app:
+    image: serversideup/php:8.3-fpm-nginx
+    volumes:
+      - ${PWD}/web:/var/www/html
+    environment:
+      SSL_MODE: "off"
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.app.rule=Host(`localhost`)"
+      - "traefik.http.routers.app.entrypoints=web"

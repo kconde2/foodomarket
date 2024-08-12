@@ -1,0 +1,43 @@
+{% extends 'base_email.html.twig' %}
+
+{% block subject %}
+    Importation de Mercuriale Terminée
+{% endblock %}
+
+{% block content %}
+    <p>Bonjour,</p>
+
+    <p>
+        Nous vous informons que le processus d'importation de votre mercuriale est maintenant terminé.
+    </p>
+
+    <p>Nom du fournisseur : {{ supplierName }}</p>
+
+    {% if importStatus == 'success' %}
+        <p>
+            L'importation s'est déroulée avec succès. Vous pouvez désormais consulter les nouveaux produits dans votre <a href="{{ siteUrl }}">catalogue</a>.
+        </p>
+    {% elseif importStatus == 'partial' %}
+        <p>
+            L'importation a été partiellement réussie. Certains produits n'ont pas pu être importés en raison d'erreurs. Veuillez vérifier les détails ci-dessous :
+        </p>
+        <ul>
+            {% for error in errors %}
+                <li>{{ error }}</li>
+            {% endfor %}
+        </ul>
+        <p>
+            Nous vous conseillons de vérifier les produits concernés et de réessayer l'importation si nécessaire. Vous pouvez consulter les détails dans votre <a href="{{ siteUrl }}">catalogue</a>.
+        </p>
+    {% endif %}
+
+    <p>
+        Merci d'utiliser notre service. Si vous avez des questions ou avez besoin d'aide, vous pouvez répondre directement à cet email.
+    </p>
+
+    <p>
+        Cordialement,<br>
+
+        L'équipe {{ appName }}
+    </p>
+{% endblock %}

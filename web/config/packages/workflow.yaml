@@ -1,0 +1,13 @@
+framework:
+    workflows:
+        product_validation:
+            type: 'state_machine'
+            supports:
+                - App\Mercuriale\Domain\Model\Product\Entity\Product
+            places:
+                - 'imported'
+                - 'validated'
+            transitions:
+                validate:
+                    from: 'imported'
+                    to: 'validated'

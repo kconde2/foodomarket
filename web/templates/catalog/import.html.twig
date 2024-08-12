@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    {% set errors = errors is defined ? errors : [] %}
+
+    {% if errors is not empty %}
+        <div class="alert alert-danger">
+            <ul>
+                {% for error in errors %}
+					<li>{{ error.message }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+    {% endif %}
+
+    <div class="max-w-lg mx-auto bg-white p-6 rounded-lg shadow-md">
+        <h2 class="text-xl font-semibold mb-4">Importer une Mercuriale</h2>
+        <form action="{{ path('catalog_import') }}" method="POST" enctype="multipart/form-data">
+            <div class="mb-4">
+                <label for="supplier_name" class="block text-gray-700">Fournisseur</label>
+                <select name="supplier_name" id="supplier_name" class="w-full px-4 py-2 border rounded shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    {% for supplier in suppliers %}
+                        <option value="{{ supplier.name }}">{{ supplier.name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="mb-4">
+                <label for="file" class="block text-gray-700">Fichier CSV</label>
+                <input type="file" name="file" id="file" class="w-full px-4 py-2 border rounded shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
+            </div>
+            <button type="submit" class="w-full bg-blue-500 text-white px-4 py-2 rounded shadow-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                Importer
+            </button>
+        </form>
+    </div>
+{% endblock %}

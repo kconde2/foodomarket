@@ -1,0 +1,56 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<div class="container mx-auto mt-10 p-6 bg-white shadow-md rounded-lg">
+    <h1 class="text-2xl font-semibold mb-6 text-gray-800">Détails du Produit</h1>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+        <div>
+            <p class="text-gray-600 font-medium">Code :</p>
+            <p class="text-gray-900 text-lg">{{ product.code }}</p>
+        </div>
+        <div>
+            <p class="text-gray-600 font-medium">Description :</p>
+            <p class="text-gray-900 text-lg">{{ product.description }}</p>
+        </div>
+        <div>
+            <p class="text-gray-600 font-medium">Prix :</p>
+            <p class="text-gray-900 text-lg">{{ product.price }} €</p>
+        </div>
+        <div>
+            <p class="text-gray-600 font-medium">Status :</p>
+            <p class="text-lg font-semibold
+                {% if product.status == 'imported' %}
+                    text-red-500
+                {% elseif product.status == 'validated' %}
+                    text-green-500
+                {% else %}
+                    text-gray-900
+                {% endif %}
+            ">
+                {% if product.status == 'imported' %}
+                    {{ 'status.imported'|trans }}
+                {% elseif product.status == 'validated' %}
+                    {{ 'status.validated'|trans }}
+                {% else %}
+                    {{ product.status }}
+                {% endif %}
+            </p>
+        </div>
+
+        <div>
+            {% if product.imageUrl %}
+                <img src="{{ product.imageUrl }}" alt="Image de {{ product.description }}" class="w-full h-auto rounded-lg shadow-md">
+            {% endif %}
+        </div>
+    </div>
+
+    {% if canValidate %}
+        <form method="post" class="text-right">
+            <button type="submit" class="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded shadow-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                Valider le Produit
+            </button>
+        </form>
+    {% endif %}
+</div>
+{% endblock %}

@@ -1,0 +1,8 @@
+mail:
+  product:
+    imported:
+      subject: Importation de la Mercuriale Terminée
+
+status:
+  imported: Importé
+  validated: Validé

@@ -1,0 +1,6 @@
+include:
+  - docker/compose/traefik.yml
+  - docker/compose/node.yml
+  - docker/compose/db.yml
+  - docker/compose/fpm-nginx.yml
+  - docker/compose/mail.yml
